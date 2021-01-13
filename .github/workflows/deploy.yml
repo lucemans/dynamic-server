@@ -14,10 +14,10 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build image
         run: docker build . --file Dockerfile --tag lvkdotsh/dynamic-server
-      
+
       - name: Publish to Registry
         uses: elgohr/Publish-Docker-Github-Action@master
         with:
-          name: lvkdotsh/dynamic-server
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
+          name: lvkdotsh/dynamic-server
