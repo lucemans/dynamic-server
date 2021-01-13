@@ -17,6 +17,8 @@ jobs:
 
       - name: Publish to Registry
         run: |
+            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login --password-stdin -u ${{ secrets.DOCKERHUB_USERNAME }}
+        
             IMAGE_ID=lvkdotsh/dynamic-server
 
             IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
