@@ -16,8 +16,15 @@ jobs:
         run: docker build . --file Dockerfile --tag lvkdotsh/dynamic-server
 
       - name: Publish to Registry
-        uses: elgohr/Publish-Docker-Github-Action@master
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_TOKEN }}
-          name: lvkdotsh/dynamic-server
+        run: |
+            IMAGE_ID=lvkdotsh/dynamic-server
+
+            IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+
+            VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+
+            [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+
+            docker tag lvkdotsh/dynamic-server $IMAGE_ID:$VERSION
+            docker push $IMAGE_ID:$VERSION
+            docker push $IMAGE_ID:latest
