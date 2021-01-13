@@ -1,0 +1,11 @@
+{
+  "name": "dynamic-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:lvkdotsh/dynamic-server.git",
+  "author": "Lucemans <luc@lucemans.nl>",
+  "license": "MIT",
+  "scripts": {
+    "build": "np --no-2fa"
+  }
+}
